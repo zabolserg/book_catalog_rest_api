@@ -12,7 +12,10 @@ This project is a ready-to-use core for creating APIs. The project uses the PHP 
 
 ## Installation
 
-1. Clone the repository to your local machine into the chosen folder.
+1. Clone the repository to your local machine into the chosen folder (for example, using HTTPS):
+   ```
+   git clone https://github.com/zabolserg/api_platform_symfony64.git
+   ```
 2. Create a `.env` file in the root folder of the cloned project. Add default Symfony content to this file:
    ```
    # In all environments, the following files are loaded if they exist,
@@ -51,7 +54,7 @@ This project is a ready-to-use core for creating APIs. The project uses the PHP 
    ###< nelmio/cors-bundle ###
    ```
 3. Configure the database connection in this file.
-4. Run composer
+4. Run composer:
    ```
    composer install
    ```
