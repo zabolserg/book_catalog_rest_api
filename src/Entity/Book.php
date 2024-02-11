@@ -6,6 +6,8 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\BookRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 #[ApiResource]
@@ -27,6 +29,13 @@ class Book
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $publishDate = null;
+
+    #[ORM\ManyToMany(targetEntity: Author::class, mappedBy: 'books', cascade: ['persist'])]
+    private Collection $authors;
+
+    public function __construct() {
+        $this->authors = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -77,6 +86,25 @@ class Book
     public function setPublishDate(?\DateTimeInterface $publishDate): static
     {
         $this->publishDate = $publishDate;
+
+        return $this;
+    }
+
+    public function getAuthors(): Collection
+    {
+        return $this->authors;
+    }
+
+    public function addAuthor(Author $author): static
+    {
+        $this->authors[] = $author;
+
+        return $this;
+    }
+
+    public function removeAuthor(Author $author): static
+    {
+        $this->authors->removeElement($author);
 
         return $this;
     }
