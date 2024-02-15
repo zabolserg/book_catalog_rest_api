@@ -20,6 +20,7 @@ use Doctrine\Common\Collections\ArrayCollection;
         new GetCollection(
             uriTemplate: '/authors/{id}/books',
             controller: ReadAuthorBookController::class,
+            shortName: 'Book',
             name: 'author_books'
         )
     ]
