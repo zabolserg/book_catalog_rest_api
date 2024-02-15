@@ -3,13 +3,27 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use App\Controller\ReadAuthorBookController;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new POST(),
+        new GetCollection(
+            uriTemplate: '/authors/{id}/books',
+            controller: ReadAuthorBookController::class,
+            name: 'author_books'
+        )
+    ]
+)]
 class Author
 {
     #[ORM\Id]
@@ -26,8 +40,7 @@ class Author
     #[ORM\Column(length: 32, nullable: true)]
     private ?string $patronymic = null;
 
-    #[ORM\ManyToMany(targetEntity: Book::class, inversedBy: 'authors', cascade: ['persist'])]
-    #[ORM\JoinTable(name: 'author_book')]
+    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'authors', cascade: ['persist'])]
     private Collection $books;
 
     public function __construct() {
