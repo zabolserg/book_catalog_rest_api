@@ -1,10 +1,10 @@
 # Readme
 
-Core for creating APIs
+Book catalog API
 
 ## Description
 
-This project is a ready-to-use core for creating APIs. The project uses the PHP framework Symfony 6.4 and the powerful API Platform tool for API development.
+The project uses the PHP framework Symfony 6.4 and the powerful API Platform tool for API development.
 
 ## Requirements
 
@@ -14,7 +14,7 @@ This project is a ready-to-use core for creating APIs. The project uses the PHP 
 
 1. Clone the repository to your local machine into the chosen folder (for example, using HTTPS):
    ```
-   git clone https://github.com/zabolserg/api_platform_symfony64.git
+   git clone https://github.com/zabolserg/book_catalog_rest_api.git
    ```
 2. Create a `.env` file in the root folder of the cloned project. Add default Symfony content to this file:
    ```
@@ -57,4 +57,8 @@ This project is a ready-to-use core for creating APIs. The project uses the PHP 
 4. Run composer:
    ```
    composer install
+   ```
+5. Execute migrations to create tables
+   ```
+   php bin/console doctrine:migrations:migrate
    ```
